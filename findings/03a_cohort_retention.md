@@ -1,146 +1,105 @@
-# Cohort Retention Analysis
+# Milestone 03 — Cohort Retention Analysis
 
 ## Business Question
 
-The CFO wanted to determine whether customer churn is worsening over time or whether overall churn is being disproportionately influenced by one particularly weak signup cohort.
+Is customer retention improving over time, or is overall churn being driven by one or two poorly performing signup cohorts?
 
-To answer this, customers were grouped into monthly signup cohorts based on their signup date. For each cohort, monthly retention was calculated as the percentage of companies that remained active at the beginning of each month after signup. Customer activity was measured at the account level, ensuring renewals, upgrades, overlapping subscriptions, and customer reactivations were handled correctly without double-counting.
+---
+
+## Approach
+
+Customer retention was analyzed using a monthly cohort framework.
+
+Each company was assigned to a cohort based on its **signup month**, following the project specification. For every subsequent month after signup, the number of companies with an active subscription at the beginning of that month was calculated and divided by the original cohort size.
+
+### Methodology
+
+1. Assign each account to a monthly signup cohort.
+2. Calculate the size of every cohort.
+3. Generate monthly snapshots (Month 0, Month 1, Month 2, ...).
+4. Mark an account as active if:
+
+   - `start_date <= snapshot_date`
+   - `end_date IS NULL OR end_date > snapshot_date`
+
+5. Count distinct active accounts for every cohort-month.
+6. Divide by the original cohort size to compute retention percentage.
+7. Visualize the results as a cohort retention heatmap.
+
+---
+
+## Cohort Retention Heatmap
+
+![Customer Cohort Retention](../figures/heat_map.png)
 
 ---
 
 # Executive Summary
 
-### Most Important Observation
+The cohort analysis shows that retention varies across signup cohorts but no single cohort consistently underperforms throughout its lifecycle. Most cohorts experience relatively low retention during the early months, followed by gradual improvement over time.
 
-**The cohort analysis does not indicate that one exceptionally poor signup cohort is dragging down overall company retention. Instead, more recent cohorts consistently achieve stronger long-term retention than earlier cohorts, suggesting that customer retention has gradually improved over time.**
+Unlike a traditional SaaS retention curve, several cohorts display increasing retention percentages in later months. This behaviour is explained by the structure of the underlying dataset rather than an error in the retention calculation.
 
-This finding suggests that churn is becoming healthier across successive customer cohorts rather than being driven by a single historical acquisition period.
+Overall, there is no evidence that overall churn is being driven by one exceptionally poor cohort. Instead, customer activity fluctuates across cohorts over time.
 
 ---
-# Customer Cohort Retention Heatmap
 
-![Customer Cohort Retention](../figures/heat_map.png)
-
-*Figure 1. Customer retention by monthly signup cohort.*
 # Key Findings
 
-## 1. Where is the steepest drop?
+## 1. No single cohort consistently underperforms
 
-The largest decline occurs immediately after customer acquisition.
-
-While every cohort begins at **100% retention in Month 0**, most cohorts experience their sharpest reduction during the first few months following signup. Month 1 retention for many early cohorts falls into the **0–15%** range before gradually recovering and stabilising.
-
-This indicates that the highest customer loss occurs during the early lifecycle, making onboarding and initial customer engagement the most critical stages for improving retention.
+Although some cohorts retain fewer customers during their early lifecycle, retention patterns converge over time. No individual signup cohort remains substantially worse than others across all observation periods.
 
 ---
 
-## 2. Where does retention stabilize?
+## 2. Retention varies across customer lifecycles
 
-After approximately **6–12 months**, retention becomes considerably more stable.
+Retention is not monotonic in this dataset. Several cohorts show higher retention rates in later months because customers can become active again through renewed or later subscriptions.
 
-Instead of continuing to decline rapidly, most cohorts settle into a relatively consistent long-term retention range between **45% and 65%**, depending on the cohort.
-
-The stabilization suggests that customers who remain active beyond their initial lifecycle become significantly more likely to continue using the product over the long term.
+This indicates that customer activity is episodic rather than permanently ending after initial inactivity.
 
 ---
 
-## 3. Are newer cohorts performing better?
+## 3. Cohort sizes remain relatively consistent
 
-Yes.
-
-Comparing older cohorts (2022–2023) with more recent cohorts (2024–2026) reveals a gradual improvement in long-term retention.
-
-Recent cohorts consistently achieve darker green retention levels across comparable lifecycle months, indicating that a larger proportion of customers remain active over time.
-
-Although the improvement is gradual rather than dramatic, the overall direction suggests healthier customer retention among more recently acquired customers.
+Most monthly cohorts contain between approximately 15 and 30 companies, making comparisons across cohorts reasonably balanced without one exceptionally large cohort dominating the analysis.
 
 ---
 
-## 4. Is one bad cohort dragging down the average?
+## 4. Overall churn is distributed across cohorts
 
-No.
-
-No individual signup cohort consistently underperforms neighbouring cohorts by a significant margin.
-
-Although small variations exist between individual cohorts, the heatmap does not reveal one exceptionally weak cohort responsible for the company's overall churn performance.
-
-Instead, retention patterns remain relatively consistent across acquisition periods.
-
-This suggests that company-wide churn reflects general customer behaviour rather than one isolated acquisition campaign or operational issue.
-
----
-
-## 5. Are there any anomalous cohorts?
-
-No major anomalies are visible.
-
-Several cohorts perform slightly better or worse than adjacent cohorts, but none display a sustained deviation large enough to indicate an exceptional event.
-
-There is no visual evidence of:
-
-- sudden retention collapse,
-- dramatic improvement,
-- isolated customer loss,
-- or one-off cohort failure.
-
----
-
-# Observation, Inference and Limitation
-
-## Observation
-
-The heatmap demonstrates that newer signup cohorts generally retain customers better over the long term than earlier cohorts. Retention behaviour remains relatively consistent across acquisition periods, with no evidence of one cohort disproportionately driving overall churn.
-
-## Inference
-
-The improving performance of recent cohorts **may indicate** improvements in customer onboarding, product adoption, customer success initiatives, subscription management, or acquisition quality.
-
-Because multiple consecutive cohorts exhibit similar behaviour, the improvement appears gradual rather than being caused by one exceptional cohort.
-
-## Limitation
-
-The dataset contains subscription history but does **not** include campaign records, pricing changes, feature releases, customer success initiatives, or operational incident logs.
-
-Therefore, while retention improvements can be observed, it is **not possible to establish a causal relationship** between the observed trend and any specific business event.
-
-The analysis identifies behavioural patterns but cannot explain their underlying causes without additional business context.
-
----
-
-# Real-World Event Assessment
-
-The cohort heatmap does not provide evidence linking retention changes to any specific real-world event such as:
-
-- Marketing campaigns
-- Pricing changes
-- Product launches
-- Service outages
-- Operational incidents
-
-Since the dataset lacks business event metadata, no causal attribution can be made.
-
-Any explanation beyond observed retention patterns would be speculative.
+Since multiple cohorts exhibit similar long-term retention behaviour, the analysis suggests that overall churn is broadly distributed rather than originating from one isolated acquisition period.
 
 ---
 
 # Business Interpretation
 
-From a CFO perspective, the analysis suggests that the company is **not experiencing worsening churn caused by one exceptionally poor acquisition cohort**.
+The retention analysis suggests that customer activity fluctuates throughout the customer lifecycle rather than following a simple continuous decline.
 
-Instead, retention behaviour appears relatively stable across customer cohorts, while more recent cohorts demonstrate healthier long-term retention than earlier cohorts.
+From a business perspective, this indicates that many customers return after periods of inactivity through renewed subscriptions or reactivation events. Therefore, improving re-engagement strategies may be as valuable as reducing initial churn.
 
-The most significant opportunity lies in reducing customer loss immediately after signup, where retention declines most sharply. Improvements in onboarding, activation, and early customer engagement are therefore likely to have the greatest impact on overall retention.
+Because no individual cohort consistently performs worse than others, broad improvements to onboarding, activation, and customer success are likely to produce greater long-term benefits than targeting a single acquisition period.
 
-The stronger long-term performance of recent cohorts also suggests that current customer acquisition and lifecycle management practices are moving in a positive direction and should continue to be reinforced.
+---
+
+# Dataset Limitation
+
+This analysis intentionally follows the project specification by defining cohorts using **customer signup month**.
+
+During validation of the source data, it was observed that many customers signed up significantly earlier than their first recorded subscription. In several cases, the delay between signup and the first subscription extended to many months or even multiple years.
+
+As a result:
+
+- Early cohort retention appears unusually low because many customers had not yet started a subscription.
+- Later retention can increase when those customers eventually become active.
+- These patterns reflect the structure of the dataset rather than an error in the cohort calculation.
+
+If the business objective were to measure **subscription retention** rather than **account signup retention**, cohorts would more appropriately be defined using each customer's first subscription start date instead of signup date.
 
 ---
 
 # Conclusion
 
-The cohort retention analysis shows that customer retention has gradually improved across successive signup cohorts, with newer customers remaining active longer than earlier cohorts.
+Using signup-month cohorts, the analysis finds no evidence that one or two poorly performing cohorts are responsible for overall churn. Customer retention varies across cohorts, but long-term behaviour is broadly similar.
 
-Most customer attrition occurs during the first few months after signup, after which retention stabilizes and remains relatively consistent.
-
-Importantly, no individual cohort appears responsible for dragging down overall company performance. Instead, churn is best understood as a portfolio-wide customer lifecycle challenge rather than the consequence of one isolated acquisition period.
-
-Overall, the findings indicate that recent operational improvements may be positively influencing customer retention, although additional business data would be required to determine the precise drivers behind this trend.
+The observed retention patterns are strongly influenced by the relationship between signup dates and subscription start dates in the dataset. Consequently, the results should be interpreted as **signup cohort retention**, consistent with the project requirements, rather than a conventional SaaS subscription retention analysis.
