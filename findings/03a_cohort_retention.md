@@ -17,7 +17,10 @@ To answer this, customers were grouped into monthly signup cohorts based on thei
 This finding suggests that churn is becoming healthier across successive customer cohorts rather than being driven by a single historical acquisition period.
 
 ---
-![Customer Cohort Retention](saas_churn_retention_analysis/figures/\heat_map.png)
+# Customer Cohort Retention Heatmap
+
+![Customer Cohort Retention](saas_churn_retention_analysis/figures/heat_map.png)
+---
 # Key Findings
 
 ## 1. Where is the steepest drop?
