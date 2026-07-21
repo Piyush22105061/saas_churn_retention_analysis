@@ -1,4 +1,4 @@
-# Milestone 03 — Cohort Retention Analysis
+# Cohort Retention Analysis
 
 ## Business Question
 
