@@ -1,3 +1,43 @@
+-- Total Active Customers 
+WITH active_subscriptions AS (
+    SELECT *
+    FROM saas.subscriptions
+    WHERE status = 'active'
+      AND start_date <= CURRENT_DATE
+      AND (end_date IS NULL OR end_date > CURRENT_DATE)
+)
+
+SELECT COUNT(DISTINCT account_id) AS active_customers
+FROM active_subscriptions;
+
+-- Paid Active Customers
+
+WITH active_subscriptions AS (
+    SELECT *
+    FROM saas.subscriptions
+    WHERE status = 'active'
+      AND start_date <= CURRENT_DATE
+      AND (end_date IS NULL OR end_date > CURRENT_DATE)
+)
+
+SELECT COUNT(DISTINCT account_id) AS paid_active_customers
+FROM active_subscriptions
+WHERE mrr > 0;
+
+-- Free Active Customers 
+
+WITH active_subscriptions AS (
+    SELECT *
+    FROM saas.subscriptions
+    WHERE status = 'active'
+      AND start_date <= CURRENT_DATE
+      AND (end_date IS NULL OR end_date > CURRENT_DATE)
+)
+
+SELECT COUNT(DISTINCT account_id) AS free_active_customers
+FROM active_subscriptions
+WHERE mrr = 0;
+
 -- Current Paid MRR
 
 WITH normalized_subscriptions AS (
@@ -89,8 +129,6 @@ AND (
 SELECT
 
 plan,
-
-COUNT(DISTINCT account_id) AS active_accounts,
 
 SUM(mrr) AS current_mrr
 
