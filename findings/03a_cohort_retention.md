@@ -19,8 +19,9 @@ This finding suggests that churn is becoming healthier across successive custome
 ---
 # Customer Cohort Retention Heatmap
 
-![Customer Cohort Retention](saas_churn_retention_analysis/figures/heat_map.png)
----
+![Customer Cohort Retention](../figures/heat_map.png)
+
+*Figure 1. Customer retention by monthly signup cohort.*
 # Key Findings
 
 ## 1. Where is the steepest drop?
