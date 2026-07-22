@@ -137,7 +137,15 @@ active_accounts AS (
 
       ON cs.account_id = s.account_id
 
+     /* Subscription must be active */
+
+     AND s.status = 'active'
+
+     /* Subscription must have already started */
+
      AND s.start_date <= cs.snapshot_date
+
+     /* Subscription must not have ended */
 
      AND (
             s.end_date IS NULL
