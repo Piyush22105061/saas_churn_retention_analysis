@@ -1,4 +1,4 @@
-# Milestone 03 — Customer Cohort Retention Analysis
+# Customer Cohort Retention Analysis
 
 ## Business Question
 
