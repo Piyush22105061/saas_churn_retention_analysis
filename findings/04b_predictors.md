@@ -13,9 +13,9 @@ For each account, behavioural features were engineered from the event logs and s
 The customer-level features were then compared between **retained** and **churned** customers using descriptive statistics and Welch's t-test.
 
 ---
-# Cohort Retention Heatmap
+# Distribution comparison for the top predictor
 
-![Customer Cohort Retention](../figures/cohort_heatmap.png)
+![Distribution comparison for the top predictor](../figures/predictor_comparison.png)
 
 ---
 
