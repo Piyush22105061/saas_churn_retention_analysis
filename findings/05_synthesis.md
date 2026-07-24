@@ -7,6 +7,13 @@ customers do differently from retained ones. Both found something real. The CFO 
 one to the top of the list — one for product, one for customer success. This page picks one and
 explains why.
 
+## Why this matters in dollar terms
+
+The foundation milestone (M2) put a number on what's at stake: 380 active customers generating
+$167.7K in monthly recurring revenue, with Enterprise plans alone carrying nearly two-thirds of
+that ($109.8K). Paid churn, which normally runs 2–4% a month, spiked to 5.37% in May 2026 — that
+spike is what justified digging deeper, and M3 and M4 are the two ways we dug.
+
 ## What each investigation found
 
 **M3 — Cohort retention:** Newer signup cohorts keep more customers. 2022–2023 cohorts settle
@@ -78,3 +85,9 @@ month, a fuller read by quarter-end.
 Treat M3 as a **Q4 follow-up for product** — a real trend worth understanding, but one that
 needs more data (campaigns, pricing, releases) before it turns into a specific fix. Don't
 recommend both at once. Do M4 first, then M3.
+
+**One open gap to flag, not to solve here:** neither investigation breaks its numbers out by
+plan tier. Since Enterprise carries ~65% of MRR on a minority of accounts, the at-risk flag as
+built today would treat a Starter account and an Enterprise account identically. Once the M4
+rule is running, weighting or prioritizing flagged accounts by MRR is a natural next refinement
+— it's a follow-up to the recommendation above, not a reason to delay it.
