@@ -1,4 +1,4 @@
-# 5. Behavioural Comparison: Churned vs Retained Customers
+# 4. Behavioural Comparison: Churned vs Retained Customers
 
 Unlike the cohort analysis in Milestone 3, which measured **how retention changes over time**, this investigation focuses on **which customer behaviours differ between churned and retained accounts**.
 
